@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Side navigation bar</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <link rel="stylesheet"
+    href='https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400;1,700&family=Roboto+Slab:wght@200&display=swap'>
+  <style>
+    .fa {
+      color: rgb(120, 176, 225);
+    }
+
+    .menu-item {
+      color: rgb(120, 176, 225);
+    }
+
+    .menu {
+      color: rgb(120, 176, 225);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="image"></div>
+  <div class="main-menu">
+    <div class="menu">Menu</div>
+    <ul>
+      
+      
+      <li class="menu-item"><i class="fa fa-home"></i><a href="#home">Home</a></li>
+      <li class="menu-item"><i class="fa fa-child"></i><a href="#about">About Me</a></li>
+      <li class="menu-item"><i class="fa fa-phone"></i><a href="#contact">Contact Me</a></li>
+      <img src="logo.png" class="logo">
+    </ul>
+  </div>
+  
+  <div class="home" id="home">
+    
+    <div class="max-width">
+      
+      <div class="home-content">
+        
+        <div class="first-text">Hey, I am </div>
+        <div class="second-text">Vrinda Bajaj</div>
+      </div>
+    </div>
+  </div>
+  <!-----About Me----->
+  <div class="about me" id="about">
+    <div class="container">
+        <div class="row">
+            <div class="about-col-1">
+                <img class="img-2" src="aboutme.png" class="imgx" width="120" height="445" >
+            </div>
+            <div class="about-col-2">
+                <h1 class="sub-title">About Me</h1>
+                <p class="ptag">I am a fresher at Vit Vellore pursuing Computer Science.<br> My hobbies are listening to music and binge-watching shows.</p>
+                <div class="tab-titles">
+                    <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                    <p class="tab-links" onclick="opentab('experience')">Experience</p>
+                    <p class="tab-links" onclick="opentab('education')">Education</p>
+                </div>
+                <div class="tab-contents active-tab" id="skills">
+                    <ul>
+                        <li><span>Management</span><br>Good communication and management skills</li>
+                        <li><span>Web Developer</span><br>Learning Stage. I have basic knowledge of Html and Css, exploring Javascript</li>
+                    </ul>
+                </div>
+                <div class="tab-contents" id="experience">
+                    <ul>
+                        <li><span>2019-2020</span><br>Served as the Sports Captain of Modern Vidya Niketan School.</li>
+                        <li><span>2021</span><br>Collaborated with a friend to make 'SongHub'<br>It is a music player, that gives recommendations on the basis of frequency and interests. <br>It is made using python language and its various libraries like tkinter,speech recognition,numpy,etc.</li>
+                    </ul>
+                </div>
+                <div class="tab-contents" id="education">
+                    <ul>
+                        <li><span>2022-Present</span><br>B.Tech in Computer Science, Vit Vellore</li>
+                        <li><span>2020-2022</span><br>The Kalyani School,Pune</li>
+                        <li><span>2012-2020</span><br>Modern Vidya Niketan,Faridabad</li>
+                        <li><span>2009-2012</span><br>Delhi Public School,Faridabad</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <!--contact me-->
+  <!---contact-->
+  <div id="contact">
+    <div id="container">
+      <div class="row">
+        <div class="contact-left">
+          <h1 class="sub-title">Contact Me</h1>
+          <p>Email : vrinda.bajaj20@gmail.com</p>
+          <p>Contact No : 7303555341</p>
+
+        </div>
+
+        <div class="contact-right">
+          <form name="submit-to-google-sheet">
+            <input type="text" name="Name" placeholder="Your Name" required>
+            <input type="email" name="Email" placeholder="Your Email" required>
+            <textarea name="Message" rows="6" placeholder="Your Message"></textarea>
+            <button type="submit" class="btn btn2">Submit</button>
+          </form>
+          <span id="msg"></span>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <script>
+
+
+    function opentab(tabname) {
+      var tablinks = document.getElementsByClassName("tab-links")
+      var tabcontents = document.getElementsByClassName("tab-contents")
+      var switch_table = document.getElementById(tabname)
+      console.log(switch_table)
+
+      for (tablink of tablinks) {
+        tablink.classList.remove("active-link");
+      }
+      for (tabcontent of tabcontents) {
+        tabcontent.classList.remove("active-tab");
+      }
+      event.currentTarget.classList.add("active-link");
+      switch_table.classList.add("active-tab")
+    }
+  </script>
+  <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwhGPbjHFf03OlU6-qTiUpLyjmQhK7ace6o1WUyZXNKm3LwHi_ZmoIKGXB5NVaV0huAQA/exec'
+    const form = document.forms['submit-to-google-sheet']
+    const msg = document.getElementById("msg")
+
+    form.addEventListener('submit', e => {
+      e.preventDefault()
+      fetch(scriptURL, { method: 'POST', body: new FormData(form) })
+        .then(response => {
+          msg.innerHTML = "Message Sent Successfully"
+          setTimeout(function () {
+            msg.innerHTML = ""
+          }, 5)
+          form.reset()
+        })
+        .catch(error => console.error('Error!', error.message))
+    })
+  </script>
+</body>
+
+</html>
